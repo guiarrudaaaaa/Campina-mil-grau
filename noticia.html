@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícia - Campina Mil Grau</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body style="background-color: #0f1419; color: white;">
+
+    <header class="header">
+        <div class="container navbar">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo.png" alt="Logo" style="height: 65px;"></a>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html">Início</a>
+                <a href="anuncie.html">Anuncie</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container" style="padding: 40px 20px; max-width: 800px;">
+        <a href="index.html" style="color:#c41e3a; font-weight:800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">
+            <i class="fas fa-chevron-left"></i> Voltar para o início
+        </a>
+        
+        <article id="noticia-full" style="margin-top:40px;">
+            </article>
+
+        <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #2a2f38; text-align: center;">
+            <p style="color: #666; font-size: 14px;">© 2026 Campina Mil Grau - Informação local com responsabilidade.</p>
+        </div>
+    </main>
+
+    <script src="assets/js/dados.js"></script>
+    <script>
+        // Lógica para pegar o ID da URL e buscar na nossa database (dados.js)
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const n = noticias.find(x => x.id == id);
+        
+        const container = document.getElementById('noticia-full');
+
+        if(n) {
+            // Atualiza o Título da Página no Navegador
+            document.title = `${n.titulo} | Campina Mil Grau`;
+
+            container.innerHTML = `
+                <header>
+                    <span style="background:#c41e3a; color:white; padding:4px 12px; font-weight:800; text-transform:uppercase; font-size: 12px; border-radius:4px;">
+                        ${n.categoria}
+                    </span>
+                    
+                    <h1 style="font-family:'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin: 20px 0; line-height: 1; color: white;">
+                        ${n.titulo}
+                    </h1>
+                    
+                    <div style="display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; color:#888; margin-bottom:30px; font-size: 13px; border-bottom: 1px solid #2a2f38; padding-bottom: 20px;">
+                        <span><i class="far fa-calendar-alt"></i> ${n.data} • Campina Grande do Sul</span>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <a href="#" style="color: #888;"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="color: #888;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: #888;"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </header>
+                
+                <figure style="margin: 0 0 35px 0;">
+                    <img src="${n.imagem}" 
+                         style="width:100%; border-radius:12px; border:1px solid #2a2f38; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"
+                         onerror="this.src='https://images.unsplash.com/photo-1585829365234-781fcd50330b?q=80&w=800'">
+                    <figcaption style="font-size: 11px; color: #555; margin-top: 10px; text-align: right; font-style: italic;">
+                        ${n.fonte}
+                    </figcaption>
+                </figure>
+
+                <div class="noticia-texto" style="font-size: 1.2rem; line-height: 1.8; color: #d1d1d1; font-family: 'Inter', sans-serif;">
+                    <p style="font-size: 1.4rem; color: white; font-weight: 600; line-height: 1.5; margin-bottom: 30px;">
+                        ${n.resumo}
+                    </p>
+                    
+                    <p style="margin-bottom: 20px;">
+                        As informações colhidas pela nossa redação indicam que este fato impacta diretamente o cotidiano dos moradores da região. Medidas estão sendo tomadas pelas autoridades competentes para garantir a normalidade e segurança de todos os envolvidos.
+                    </p>
+                    
+                    <p style="margin-bottom: 20px;">
+                        Além disso, especialistas apontam que o cenário atual de 2026 favorece novos investimentos em infraestrutura e serviços básicos em Campina Grande do Sul, refletindo no crescimento econômico local observado nos últimos meses.
+                    </p>
+                    
+                    <div style="background: #1a2029; padding: 30px; border-radius: 12px; border-left: 5px solid #c41e3a; margin: 45px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);">
+                        <h4 style="margin-top:0; color: #c41e3a; font-family: 'Bebas Neue'; font-size: 1.8rem;">Acompanhe o Mil Grau</h4>
+                        <p style="margin: 0; font-size: 1rem; color: #aaa;">Esta matéria será atualizada assim que novos fatos forem confirmados por nossa equipe de jornalismo. Ative as notificações no nosso Instagram para não perder nada.</p>
+                    </div>
+
+                    <p style="margin-bottom: 20px;">
+                        Fique ligado no portal <strong>Campina Mil Grau</strong> para a cobertura completa dos fatos que acontecem em Campina Grande do Sul, Quatro Barras e toda a RMC.
+                    </p>
+                </div>
+            `;
+        } else {
+            // Caso o ID não exista nos dados.js
+            container.innerHTML = `
+                <div style="text-align: center; padding: 100px 0;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #c41e3a; margin-bottom: 20px;"></i>
+                    <h1 style="font-family:'Bebas Neue'; font-size: 3.5rem;">CONTEÚDO INDISPONÍVEL</h1>
+                    <p style="color: #666; margin-bottom: 30px;">A notícia que você procura não foi encontrada ou foi removida de nossos servidores.</p>
+                    <a href="index.html" class="btn btn-red" style="padding: 15px 40px;">VOLTAR PARA O INÍCIO</a>
+                </div>`;
+        }
+    </script>
+</body>
+</html>

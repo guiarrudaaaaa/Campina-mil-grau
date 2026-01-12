@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campina Mil Grau | O Maior Portal da RMC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Campina Mil Grau">
+                </a>
+            </div>
+            <nav class="nav-menu" id="menu">
+                <a href="index.html">Início</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="anuncie.html">Anuncie</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+            <button class="mobile-menu-icon" id="btn-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="ticker-wrapper">
+        <div class="ticker-label">URGENTE</div>
+        <div class="ticker-content">
+            <div class="ticker-text">
+                <span class="ticker-spacer"></span>
+                <span>• Brasil registra crescimento recorde no setor de serviços no início de 2026</span>
+                <span>• Nova frente fria avança pelo Sul e traz alerta de chuvas para a Grande Curitiba</span>
+                <span>• Governo Federal discute novas metas para o salário mínimo e teto de gastos</span>
+                <span>• Campina Grande do Sul inicia preparativos para a Festa do Caqui 2026</span>
+                <span>• Brasil registra crescimento recorde no setor de serviços no início de 2026</span>
+                <span>• Nova frente fria avança pelo Sul e traz alerta de chuvas para a Grande Curitiba</span>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <p class="hero-tagline">DE CAMPINA PARA O MUNDO</p>
+                <h1>A SUA CONEXÃO COM <span>CAMPINA GRANDE DO SUL</span></h1>
+                <p class="hero-subtitle">Acompanhe em tempo real o que acontece no maior município da Região Metropolitana de Curitiba.</p>
+                <div class="hero-btns">
+                    <a href="#destaques-section" class="btn btn-red">Ver Destaques</a>
+                    <a href="#noticias" class="btn btn-outline">Últimas Notícias</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container category-section">
+            <h3 class="category-label">Filtrar por assunto:</h3>
+            <div class="category-links">
+                <button class="cat-pill active" data-category="todos">Tudo</button>
+                <button class="cat-pill" data-category="local">Locais</button>
+                <button class="cat-pill" data-category="segurança">Segurança</button>
+                <button class="cat-pill" data-category="esportes">Esportes</button>
+                <button class="cat-pill" data-category="economia">Economia</button>
+                <button class="cat-pill" data-category="saúde">Saúde</button>
+            </div>
+        </section>
+
+        <section class="container section-padding" id="destaques-section">
+            <div class="section-header">
+                <h2 class="section-title">Principais Destaques</h2>
+                <div class="title-line"></div>
+            </div>
+            <div id="featuredContainer" class="news-grid"></div>
+        </section>
+
+        <section class="container section-padding" id="noticias">
+            <div class="section-header">
+                <h2 class="section-title">Últimas Notícias</h2>
+                <div class="title-line"></div>
+            </div>
+            <div id="noticiasContainer" class="news-grid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column about">
+                <img src="assets/images/logo.png" alt="Logo Rodapé" class="footer-logo">
+                <p>O portal independente de notícias que mais cresce na região metropolitana de Curitiba.</p>
+            </div>
+            
+            <div class="footer-column links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="anuncie.html">Anuncie</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column social">
+                <h4>Siga-nos</h4>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/campinamilgrau/" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://facebook.com/campinagrandemilgrau" target="_blank" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://wa.me/5541995225483" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+<div class="footer-bottom">
+    <p>&copy; 2026 Campina Mil Grau. Todos os direitos reservados.</p>
+    <p class="dev-credit">Desenvolvido por <a href="#" target="_blank">Guilherme Arruda De Souza</a></p>
+</div>
+    </footer>
+
+    <a href="https://wa.me/5541987648976" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="assets/js/dados.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
