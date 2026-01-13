@@ -1,141 +1,101 @@
 /**
- * MOTOR DE RENDERIZAÇÃO DINÂMICA - CAMPINA MIL GRAU
- * ----------------------------------------------------------------
- * Desenvolvedor: Guilherme Arruda De Souza
- * Atualizado com Menu Mobile e WhatsApp
- * ----------------------------------------------------------------
+ * MOTOR INTEGRADO - CAMPINA MIL GRAU
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // [SELEÇÃO DE ELEMENTOS - NOTÍCIAS]
+    const swiperWrapper = document.querySelector('.hero-slider .swiper-wrapper');
     const featCont = document.getElementById('featuredContainer');
     const newsCont = document.getElementById('noticiasContainer');
     const buttons = document.querySelectorAll('.cat-pill');
-    const destaqueSection = document.getElementById('destaques-section');
-
-    // [SELEÇÃO DE ELEMENTOS - MENU MOBILE]
     const btnMenu = document.getElementById('btn-menu');
     const menu = document.getElementById('menu');
 
-    /**
-     * [FUNÇÃO: GERAR CARD HTML]
-     */
+    // [1. FUNÇÃO: GERAR CARD HTML]
     function createCard(n) {
         return `
-            <article class="news-card" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.5s forwards;">
-                <div style="overflow:hidden;">
+            <article class="news-card">
+                <div class="card-img-container">
+                    <span class="card-category">${n.categoria}</span>
                     <a href="noticia.html?id=${n.id}">
-                        <img src="${n.imagem}" alt="${n.titulo}" 
-                             onerror="this.src='https://images.unsplash.com/photo-1585829365234-781fcd50330b?q=80&w=800'">
+                        <img src="${n.imagem}" alt="${n.titulo}" loading="lazy">
                     </a>
                 </div>
                 <div class="news-content">
-                    <div>
-                        <span class="news-category">${n.categoria}</span>
-                        <a href="noticia.html?id=${n.id}" style="text-decoration:none; color:inherit;">
-                            <h3 class="news-title">${n.titulo}</h3>
-                        </a>
-                        <p style="font-size:14px; color:#555; margin-bottom:15px; line-height:1.4;">${n.resumo}</p>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; border-top:1px solid #eee; padding-top:10px; margin-top:auto;">
+                    <a href="noticia.html?id=${n.id}" style="text-decoration:none;">
+                        <h3 class="news-title">${n.titulo}</h3>
+                    </a>
+                    <p class="news-resumo">${n.resumo}</p>
+                    <div class="news-footer">
                         <span><i class="far fa-calendar-alt"></i> ${n.data}</span>
-                        <span style="color:#c41e3a; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">Ler Mais →</span>
+                        <a href="noticia.html?id=${n.id}" class="read-more-link">Ler Mais →</a>
                     </div>
                 </div>
             </article>`;
     }
 
-    /**
-     * [FUNÇÃO: RENDERIZAR INTERFACE]
-     */
-    function render(filter = 'todos') {
+    // [2. FUNÇÃO: RENDERIZAR TUDO]
+    function renderPortal(filter = 'todos') {
         if (typeof noticias === 'undefined') return;
 
-        if (filter === 'todos') {
-            const feat = noticias.filter(n => n.destaque);
-            if (featCont) featCont.innerHTML = feat.map(createCard).join('');
-            if (destaqueSection) destaqueSection.style.display = 'block';
+        if (featCont) featCont.innerHTML = '';
+        if (newsCont) newsCont.innerHTML = '';
 
-            const list = noticias.filter(n => !n.destaque);
-            if (newsCont) newsCont.innerHTML = list.map(createCard).join('');
-        } else {
-            if (destaqueSection) destaqueSection.style.display = 'none';
-            const list = noticias.filter(n => n.categoria.toLowerCase() === filter.toLowerCase());
-            
-            if (newsCont) {
-                if (list.length === 0) {
-                    newsCont.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 50px; color: #888;">Nenhuma notícia encontrada.</p>`;
-                } else {
-                    newsCont.innerHTML = list.map(createCard).join('');
-                }
-            }
+        // Renderiza o Carrossel (Só se for "todos")
+        if (filter === 'todos' && swiperWrapper) {
+            const carrosselData = noticias.filter(n => n.noCarrossel);
+            swiperWrapper.innerHTML = carrosselData.map(n => `
+                <div class="swiper-slide hero" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('${n.imagem}');">
+                    <div class="container hero-content">
+                        <p class="hero-tagline">${n.categoria.toUpperCase()}</p>
+                        <h1>${n.titulo}</h1>
+                        <p class="hero-subtitle">${n.resumo.substring(0, 160)}...</p>
+                        <div class="hero-btns">
+                            <a href="noticia.html?id=${n.id}" class="btn btn-red">LER REPORTAGEM COMPLETA</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Reinicia Swiper para carregar as novas lâminas
+            new Swiper('.hero-slider', {
+                loop: true,
+                effect: 'fade',
+                autoplay: { delay: 6000, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            });
         }
+
+        // Renderiza Grades
+        noticias.forEach(n => {
+            if (filter !== 'todos' && n.categoria.toLowerCase() !== filter.toLowerCase()) return;
+            if (filter === 'todos' && n.noCarrossel) return;
+
+            const html = createCard(n);
+            if (n.destaque && filter === 'todos') {
+                if (featCont) featCont.innerHTML += html;
+            } else {
+                if (newsCont) newsCont.innerHTML += html;
+            }
+        });
     }
 
-    // [EVENTOS DE CLIQUE - FILTROS]
+    // [3. FILTROS E MENU]
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            if (newsCont) {
-                newsCont.style.opacity = '0';
-                setTimeout(() => {
-                    render(btn.dataset.category);
-                    newsCont.style.opacity = '1';
-                }, 200);
-            }
+            renderPortal(btn.dataset.category);
         });
     });
 
-    // [LÓGICA DO MENU HAMBÚRGUER]
-    if (btnMenu && menu) {
+    if (btnMenu) {
         btnMenu.addEventListener('click', () => {
             menu.classList.toggle('active');
             const icon = btnMenu.querySelector('i');
-            
-            if (menu.classList.contains('active')) {
-                icon.className = 'fas fa-times'; // Ícone de fechar
-                document.body.style.overflow = 'hidden'; // Trava o fundo
-            } else {
-                icon.className = 'fas fa-bars'; // Ícone de menu
-                document.body.style.overflow = 'auto'; // Destrava o fundo
-            }
-        });
-
-        // Fecha o menu ao clicar em qualquer link (importante para navegação)
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.remove('active');
-                btnMenu.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = 'auto';
-            });
+            icon.className = menu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
         });
     }
 
-    // Inicialização
-    render();
+    renderPortal();
 });
-
-// [HEADER AO ROLAR]
-let lastScrollTop = 0;
-const header = document.querySelector('.header');
-
-window.addEventListener('scroll', () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (header) {
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.classList.add('header-hidden');
-        } else {
-            header.classList.remove('header-hidden');
-        }
-    }
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
-}, { passive: true });
-
-// Animação CSS Dinâmica
-const style = document.createElement('style');
-style.innerHTML = `
-    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-    #noticiasContainer { transition: opacity 0.3s ease; }
-`;
-document.head.appendChild(style);
