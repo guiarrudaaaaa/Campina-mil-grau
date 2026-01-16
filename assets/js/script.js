@@ -1,5 +1,5 @@
 /**
- * MOTOR INTEGRADO - CAMPINA MIL GRAU
+ * MOTOR INTEGRADO OTIMIZADO - CAMPINA MIL GRAU 2026
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </article>`;
     }
 
-    // [2. FUNÇÃO: RENDERIZAR TUDO]
+    // [2. FUNÇÃO: RENDERIZAR PORTAL]
     function renderPortal(filter = 'todos') {
         if (typeof noticias === 'undefined') return;
 
         if (featCont) featCont.innerHTML = '';
         if (newsCont) newsCont.innerHTML = '';
 
-        // Renderiza o Carrossel (Só se for "todos")
+        // Renderiza o Carrossel Principal apenas no modo "Tudo"
         if (filter === 'todos' && swiperWrapper) {
             const carrosselData = noticias.filter(n => n.noCarrossel);
             swiperWrapper.innerHTML = carrosselData.map(n => `
@@ -56,17 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `).join('');
 
-            // Reinicia Swiper para carregar as novas lâminas
+            // Inicializa Swiper de Destaques
             new Swiper('.hero-slider', {
                 loop: true,
                 effect: 'fade',
                 autoplay: { delay: 6000, disableOnInteraction: false },
                 pagination: { el: '.swiper-pagination', clickable: true },
-                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
             });
         }
 
-        // Renderiza Grades
+        // Renderiza os Cards de Notícias
         noticias.forEach(n => {
             if (filter !== 'todos' && n.categoria.toLowerCase() !== filter.toLowerCase()) return;
             if (filter === 'todos' && n.noCarrossel) return;
@@ -80,15 +80,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // [3. FILTROS E MENU]
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderPortal(btn.dataset.category);
-        });
+function initPartners() {
+    const sliderEl = document.querySelector('.partners-slider');
+    if (!sliderEl) return;
+
+    const partnersSwiper = new Swiper('.partners-slider', {
+        loop: true,
+        speed: 5500,
+        allowTouchMove: true,
+        freeMode: true,
+        loopedSlides: 12,
+        slidesPerView: 'auto',
+        spaceBetween: 70,
+        autoplay: {
+            delay: 0,
+            disableOnInteraction: false, // Não deixa o usuário "matar" o autoplay
+        },
+        on: {
+            // Se o loop parar por qualquer motivo de interação, isso aqui força ele a voltar
+            touchEnd: function() {
+                this.autoplay.run();
+            },
+            transitionEnd: function() {
+                this.autoplay.run();
+            }
+        }
     });
 
+    // Forçar a retomada manual se o pauseOnMouseEnter falhar
+    sliderEl.addEventListener('mouseenter', () => partnersSwiper.autoplay.stop());
+    sliderEl.addEventListener('mouseleave', () => partnersSwiper.autoplay.start());
+}
+
+    // [4. MENU MOBILE]
     if (btnMenu) {
         btnMenu.addEventListener('click', () => {
             menu.classList.toggle('active');
@@ -97,5 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // [5. EVENTOS DE FILTRO]
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderPortal(btn.dataset.category);
+        });
+    });
+
+    // EXECUÇÃO IMEDIATA
     renderPortal();
+    initPartners();
 });
+

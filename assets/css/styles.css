@@ -78,7 +78,8 @@ body {
 .ticker-text {
     display: inline-block;
     white-space: nowrap;
-    animation: scroll-ticker 55s linear infinite;
+    /* Mudei de 55s para 30s - ajuste conforme o gosto */
+    animation: scroll-ticker 30s linear infinite;
 }
 .ticker-text span { padding: 0 60px; font-size: 14px; color: #bbb; }
 
@@ -87,7 +88,7 @@ body {
     to { transform: translateX(-100%); }
 }
 
-/* [HERO CARROSSEL - REFINADO] */
+/* [HERO CARROSSEL] */
 .hero-slider {
     width: 100%;
     height: 85vh;
@@ -104,34 +105,22 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
-    padding: 80px 20px 120px; /* Padding inferior aumentado para dar respiro ao botão */
+    padding: 80px 20px 120px;
     position: relative;
     visibility: hidden;
 }
 
-.swiper-slide-active.hero {
-    visibility: visible;
-}
+.swiper-slide-active.hero { visibility: visible; }
 
 .swiper-slide.hero::before {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(
-        to bottom, 
-        rgba(15, 20, 25, 0.8) 0%, 
-        rgba(15, 20, 25, 0.4) 40%, 
-        rgba(15, 20, 25, 0.4) 60%, 
-        var(--dark-bg) 100%
-    );
+    background: linear-gradient(to bottom, rgba(15, 20, 25, 0.8) 0%, rgba(15, 20, 25, 0.4) 40%, rgba(15, 20, 25, 0.4) 60%, var(--dark-bg) 100%);
     z-index: 1;
 }
 
-.hero-content { 
-    max-width: 950px; 
-    z-index: 10; 
-    position: relative; 
-}
+.hero-content { max-width: 950px; z-index: 10; position: relative; }
 
 .hero-tagline {
     font-weight: 800;
@@ -163,14 +152,9 @@ body {
     line-height: 1.4;
 }
 
-.hero-btns { 
-    display: flex; 
-    gap: 20px; 
-    justify-content: center; 
-    margin-bottom: 10px; /* Espaço para não encostar na paginação */
-}
+.hero-btns { display: flex; gap: 20px; justify-content: center; margin-bottom: 10px; }
 
-/* [SWIPER CONTROLS - AJUSTADOS] */
+/* [SWIPER CONTROLS] */
 .swiper-button-next, .swiper-button-prev {
     color: var(--primary) !important;
     background: rgba(0,0,0,0.5);
@@ -178,15 +162,12 @@ body {
     height: 50px !important;
     border-radius: 50%;
     z-index: 10;
-    top: 50% !important; /* Trava no centro vertical real */
+    top: 50% !important;
     transform: translateY(-50%);
 }
 .swiper-button-next::after, .swiper-button-prev::after { font-size: 18px !important; font-weight: bold; }
 
-.swiper-pagination {
-    bottom: 35px !important; /* Fixado no fundo para não subir sobre o conteúdo */
-    z-index: 10;
-}
+.swiper-pagination { bottom: 35px !important; z-index: 10; }
 .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
 .swiper-pagination-bullet-active {
     background: var(--primary) !important;
@@ -207,231 +188,453 @@ body {
     display: inline-block;
     border: none;
 }
-.btn-red { 
-    background: var(--primary) !important; 
-    color: white !important; 
-    box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
-}
+.btn-red { background: var(--primary) !important; color: white !important; box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4); }
 .btn-red:hover { background: var(--primary-hover) !important; transform: translateY(-3px); }
 
-.btn-outline { 
-    background: white !important; 
-    color: black !important; 
-}
+.btn-outline { background: white !important; color: black !important; }
 .btn-outline:hover { background: #f0f0f0 !important; transform: translateY(-3px); }
 
-/* [CATEGORIAS] */
-.category-section { padding: 50px 25px 30px; margin-top: -50px; position: relative; z-index: 100; }
-.category-label { font-size: 1.1rem; color: #888; margin-bottom: 25px; display: block; font-weight: 600; }
-.category-links { display: flex; flex-wrap: wrap; gap: 15px; }
+/* [CATEGORIAS CENTRALIZADAS] */
+.category-section { 
+    padding: 50px 25px 30px; 
+    margin-top: -50px; 
+    position: relative; 
+    z-index: 100;
+    width: 100%;
+    /* Garante que o container pai alinhe tudo ao centro */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
 
+.category-links { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px;           
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Reduzi para garantir que quebre 2 em cima e 2 embaixo no mobile */
+    margin: 0 auto;
+}
+
+.cat-pill { 
+    background: #1a2029; 
+    border: 1px solid #333; 
+    color: #fff; 
+    padding: 12px 0;    /* Padding lateral zero para controlar pela largura fixa */
+    border-radius: 10px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: var(--transition-smooth);
+    
+    /* O SEGREDO DO ALINHAMENTO: */
+    min-width: 120px;   /* Todos os botões terão no mínimo este tamanho */
+    text-align: center; /* Centraliza o texto dentro do botão */
+    flex: 0 1 auto;     /* Impede que o botão estique além do necessário */
+}
+
+/* [TÍTULOS DAS SEÇÕES CENTRALIZADOS] */
+.section-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.title-line { 
+    width: 80px; 
+    height: 6px; 
+    background: var(--primary); 
+    margin: 0 auto; /* Garante que a linha vermelha fique no centro */
+    border-radius: 2px; 
+}
+
+/* Ajuste específico para o grid de notícias não quebrar o alinhamento */
+.news-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 40px; 
+    justify-content: center; /* Centraliza os cards caso a última linha tenha poucos */
+}
 .cat-pill { 
     background: #1a2029; border: 1px solid #333; color: #fff; padding: 14px 28px; 
     border-radius: 10px; font-weight: 700; cursor: pointer; transition: var(--transition-smooth);
 }
 .cat-pill.active { background: var(--primary); border-color: var(--primary); }
 
-/* [NOTÍCIAS - DESIGN PREMIUM] */
-.section-padding { padding: 80px 0; }
+/* [CARROSSEL DE PATROCINADORES - DESIGN REFINADO] */
+.partners-carousel-wrapper {
+    background: #ffffff;
+    padding: 35px 0; /* Mais respiro vertical para elegância */
+    margin: 30px 25px 60px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra mais suave e moderna */
+    border: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Criando um efeito de fade nas bordas para as logos não sumirem do nada */
+.partners-carousel-wrapper::before,
+.partners-carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.partners-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, white, rgba(255,255,255,0));
+}
+.partners-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, white, rgba(255,255,255,0));
+}
+
+.partners-slider .swiper-wrapper {
+    display: flex !important;
+    align-items: center !important; /* Alinhamento vertical cirúrgico */
+    transition-timing-function: linear !important;
+}
+
+.partner-logo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.partner-logo img {
+    max-height: 65px; /* Tamanho equilibrado (nem gigante, nem minúsculo) */
+    width: auto;
+    object-fit: contain;
+    line-height: 0;
+    /* Um leve filtro para as logos não gritarem tanto, que sai no hover */
+    filter: grayscale(20%) opacity(0.8);
+    transition: all 0.4s ease;
+}
+
+.partner-logo img:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.08); /* Aumento suave ao passar o mouse */
+}
+
+@media (max-width: 768px) {
+    .partners-carousel-wrapper { 
+        margin: 20px 15px; 
+        padding: 25px 0;
+    }
+    .partner-logo img { max-height: 45px; }
+}
+
+/* [NOTÍCIAS] */
+.section-padding { padding: 60px 0; }
 .section-title { font-family: 'Bebas Neue'; font-size: 3.2rem; letter-spacing: 1px; margin-bottom: 12px; color: #fff; }
 .title-line { width: 80px; height: 6px; background: var(--primary); margin-bottom: 50px; border-radius: 2px; }
 
-.news-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-    gap: 40px; 
-}
+.news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
 
 .news-card { 
-    background: #ffffff; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    transition: var(--transition-smooth); 
-    height: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #ffffff; border-radius: 12px; overflow: hidden; transition: var(--transition-smooth); 
+    height: 100%; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.news-card:hover { 
-    transform: translateY(-12px); 
-    box-shadow: 0 15px 45px rgba(196, 30, 58, 0.25); 
-}
+.news-card:hover { transform: translateY(-12px); box-shadow: 0 15px 45px rgba(196, 30, 58, 0.25); }
 
-.card-img-container { 
-    width: 100%; 
-    height: 230px; 
-    overflow: hidden; 
-    position: relative;
-    background-color: #111;
-}
-
-.card-img-container img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    transition: transform 0.8s ease; 
-}
-
+.card-img-container { width: 100%; height: 230px; overflow: hidden; position: relative; background-color: #111; }
+.card-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
 .news-card:hover .card-img-container img { transform: scale(1.1); }
 
 .card-category {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: var(--primary);
-    color: white;
-    padding: 5px 12px;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-    border-radius: 4px;
-    z-index: 5;
+    position: absolute; top: 15px; left: 15px; background: var(--primary); color: white;
+    padding: 5px 12px; font-size: 11px; font-weight: 800; text-transform: uppercase; border-radius: 4px; z-index: 5;
 }
 
-.news-content { 
-    padding: 25px; 
-    flex-grow: 1; 
-    display: flex; 
-    flex-direction: column; 
-    color: #1a1a1a;
-}
-
-.news-title { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 1.85rem; 
-    line-height: 1.2; 
-    margin-bottom: 15px; 
-    color: #080808; 
-    transition: 0.3s;
-}
-
+.news-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; color: #1a1a1a; }
+.news-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.85rem; line-height: 1.2; margin-bottom: 15px; color: #080808; }
 .news-card:hover .news-title { color: var(--primary); }
 
-.news-resumo { 
-    font-size: 14.5px; 
-    color: #444; 
-    line-height: 1.5; 
-    margin-bottom: 25px; 
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+.news-resumo { font-size: 14.5px; color: #444; line-height: 1.5; margin-bottom: 25px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 
-.news-footer { 
-    margin-top: auto; 
-    padding-top: 20px; 
-    border-top: 1px solid #eee; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    font-size: 12px; 
-    color: #888; 
-    font-weight: 600;
-}
+.news-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #888; font-weight: 600; }
+.read-more-link { color: var(--primary); font-weight: 900; text-transform: uppercase; }
 
-.read-more-link { 
-    color: var(--primary); 
-    font-weight: 900; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px;
-}
-
-/* [FOOTER JORNALÍSTICO] */
-.footer { 
-    background: #050505; 
-    padding: 80px 0 40px; 
-    border-top: 4px solid var(--primary); 
-    margin-top: 80px; 
-}
-.footer-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 50px; 
-    align-items: start;
-}
-.footer-column h4 { 
-    font-family: 'Bebas Neue'; 
-    font-size: 1.8rem; 
-    color: var(--primary); 
-    margin-bottom: 25px; 
-    text-transform: uppercase;
-}
+/* [FOOTER] */
+.footer { background: #050505; padding: 80px 0 40px; border-top: 4px solid var(--primary); margin-top: 80px; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; }
+.footer-column h4 { font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--primary); margin-bottom: 25px; }
 .footer-logo { height: 70px; margin-bottom: 20px; }
-.footer-column p { 
-    color: #aaa; 
-    font-size: 14px; 
-    line-height: 1.8; 
-    max-width: 380px; 
-}
-.footer-column p strong { color: var(--primary); }
+.footer-column p { color: #aaa; font-size: 14px; line-height: 1.8; }
 
 .footer-column ul { list-style: none; padding: 0; }
 .footer-column ul li { margin-bottom: 12px; }
-.footer-column ul li a { 
-    color: #ffffff !important; 
-    font-size: 15px; 
-    font-weight: 500; 
-    transition: var(--transition-smooth); 
-    display: inline-block;
-}
+.footer-column ul li a { color: #ffffff !important; font-size: 15px; transition: var(--transition-smooth); }
 .footer-column ul li a:hover { color: var(--primary) !important; padding-left: 8px; }
 
-/* [ÍCONES SOCIAIS] */
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.social-btn { 
-    width: 45px; 
-    height: 45px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 8px; 
-    color: white !important; 
-    font-size: 1.2rem; 
-    transition: var(--transition-smooth);
-    border: none;
-}
-
+.social-icons { display: flex; gap: 15px; margin-top: 15px; }
+.social-btn { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: white !important; font-size: 1.2rem; transition: var(--transition-smooth); }
 .social-btn.insta { background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%) !important; }
 .social-btn.fb { background: #1877F2 !important; }
 .social-btn.wa { background: #25d366 !important; }
-.social-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-.footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #1a2029; color: #666; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-.dev-credit { font-size: 13px; color: #888; margin-top: 5px; }
-.dev-credit a { color: #fff !important; font-weight: 700; transition: var(--transition-smooth); }
-.dev-credit a:hover { color: var(--primary) !important; }
+.footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #1a2029; color: #666; font-size: 14px; }
+.dev-credit a { color: #fff !important; font-weight: 700; }
 
 /* [WHATSAPP] */
-.whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 9999; color: white !important; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); transition: 0.3s; }
-.whatsapp-float:hover { transform: scale(1.1); background: #128c7e; }
+.whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 9999; color: white !important; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 
 /* [RESPONSIVIDADE] */
 @media (max-width: 768px) {
     .mobile-menu-icon { display: block; }
-    .nav-menu { 
-        display: none; 
-        flex-direction: column; 
-        position: absolute; 
-        top: 100%; 
-        left: 0; 
-        width: 100%; 
-        background: #080808; 
-        padding: 20px; 
-        border-bottom: 3px solid var(--primary); 
-    }
+    .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #080808; padding: 20px; border-bottom: 3px solid var(--primary); }
     .nav-menu.active { display: flex; }
     .nav-menu a { margin: 10px 0; font-size: 1.8rem; margin-left: 0; }
     .hero-content h1 { font-size: 2.8rem; }
-    .hero-btns { flex-direction: column; width: 100%; gap: 10px; }
-    .footer-grid { text-align: center; }
-    .social-icons { justify-content: center; }
-    .category-section { margin-top: 0; }
+    .partners-carousel-wrapper { margin: 10px 15px 30px; min-height: 90px; }
+    .partner-logo img { max-height: 40px; }
+}
+/* Força a exibição imediata de todas as logos em linha */
+.partners-slider .swiper-wrapper {
+    display: flex !important; /* Força ficar um do lado do outro antes do Swiper */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    transition-timing-function: linear !important;
+}
+
+.partners-slider .swiper-slide {
+    width: auto !important; /* Garante que não fiquem esmagadas */
+    min-width: 150px;       /* Dá um espaço mínimo para cada uma */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Evita que o container "pule" ou mude de tamanho */
+.partners-carousel-wrapper {
+    min-height: 110px;
+    overflow: hidden; 
+    background: #ffffff;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+/* Força o efeito de "esteira" contínua e suave */
+.partners-slider .swiper-wrapper {
+    transition-timing-function: linear !important;
+    margin: 0 auto;
+}
+
+/* Garante que as logos não fiquem cortadas durante o movimento */
+.partner-logo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+/* [DESIGN PARA DOIS PARCEIROS APENAS] */
+.partners-static-section {
+    padding: 60px 0;
+    background: #fbfbfb;
+    margin: 30px 0;
+}
+
+.partners-dual-display {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.partner-card.big-card {
+    background: #ffffff;
+    width: 320px; /* Mais largo para dar destaque */
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    text-decoration: none;
+}
+
+.partner-card.big-card:hover {
+    transform: translateY(-12px);
+    border-color: #c41e3a;
+    box-shadow: 0 15px 45px rgba(196, 30, 58, 0.15);
+}
+
+.partner-card.big-card img {
+    max-height: 90px;
+    width: auto;
+    object-fit: contain;
+    transition: 0.4s;
+}
+
+.view-more {
+    margin-top: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #c41e3a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.partner-card.big-card:hover .view-more {
+    opacity: 1;
+}
+
+/* Responsivo para celular */
+@media (max-width: 768px) {
+    .partners-dual-display {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .partner-card.big-card {
+        width: 100%;
+        max-width: 300px;
+        height: 160px;
+    }
+}.partners-vip-section {
+    position: relative;
+    padding: 80px 0;
+    background: #0a0a0a;
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.ambient-light {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.2) 0%, rgba(0,0,0,0) 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.vip-header { text-align: center; margin-bottom: 50px; position: relative; z-index: 2; }
+.vip-badge { background: #c41e3a; color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
+.vip-title { font-family: 'Bebas Neue', cursive; font-size: 3.5rem; color: #fff; margin-top: 10px; }
+
+.vip-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; position: relative; z-index: 2; }
+
+/* =========================================
+   VIP PARTNERS - DESIGN FINAL EXTRAORDINÁRIO
+   ========================================= */
+
+.partners-vip-section {
+    position: relative;
+    padding: 80px 0;
+    background: #0a0a0a;
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.ambient-light {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.15) 0%, rgba(0,0,0,0) 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.vip-header { text-align: center; margin-bottom: 50px; position: relative; z-index: 2; }
+.vip-badge { background: #c41e3a; color: #fff; padding: 5px 15px; border-radius: 4px; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+.vip-title { font-family: 'Bebas Neue', cursive; font-size: 3.8rem; color: #fff; margin-top: 10px; letter-spacing: 2px; }
+
+.vip-grid { display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; position: relative; z-index: 2; }
+
+/* O CARD PREMIUM - MAIS ROBUSTO */
+.vip-card {
+    position: relative;
+    width: 420px; /* Largura aumentada para preencher a tela */
+    height: 280px; /* Altura aumentada para impacto visual */
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    text-decoration: none;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.vip-card:hover {
+    transform: translateY(-15px);
+    border-color: #c41e3a;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* LOGO TWO GUEDES - AGORA REALMENTE GRANDE */
+.img-fit-wide {
+    width: 90% !important; 
+    max-height: 140px !important; /* Aumentado de 110px para 140px */
+    object-fit: contain;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+}
+
+/* LOGO CAMPINA - IMPOENTE */
+.img-fit-tall {
+    height: 160px !important; /* Aumentado de 130px para 160px */
+    width: auto;
+    object-fit: contain;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+}
+
+.vip-card:hover img {
+    transform: scale(1.12); /* Efeito de zoom no hover */
+}
+
+/* TEXTOS E LINKS */
+.card-info { text-align: center; margin-top: 10px; }
+.card-info h3 { color: #fff; font-family: 'Inter', sans-serif; font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
+.cta-link { 
+    color: #c41e3a; 
+    font-weight: 800; 
+    font-size: 0.85rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    opacity: 0.6; 
+    transition: 0.3s; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.vip-card:hover .cta-link { opacity: 1; transform: translateY(-2px); }
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .vip-card { width: 100%; max-width: 360px; height: 240px; }
+    .img-fit-wide { max-height: 100px !important; }
+    .img-fit-tall { height: 120px !important; }
+    .vip-title { font-size: 2.8rem; }
 }

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Guedes Motors | Parceiro VIP Campina Mil Grau</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #c41e3a;
+            --dark: #0a0a0a;
+            --gold: #d4af37; /* Cor de destaque para veículos premium */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #fff; color: #333; overflow-x: hidden; }
+
+        /* HEADER FIXO */
+        .header-partner {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .nav-partner { display: flex; justify-content: space-between; align-items: center; }
+        .back-link { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { color: var(--primary); }
+
+        /* HERO SECTION - INSPIRADO NO SITE DELES */
+        .hero-motors {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(10,10,10,1)), 
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920'); /* Puxando fundo do estilo deles */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content img {
+            max-width: 350px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+        }
+
+        .hero-content h1 { font-family: 'Bebas Neue'; font-size: 4rem; letter-spacing: 3px; }
+        .hero-content p { font-size: 1.2rem; color: #ccc; max-width: 600px; margin: 10px auto; }
+
+        /* SEÇÃO SOBRE */
+        .about-motors { padding: 80px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text h2 { font-family: 'Bebas Neue'; font-size: 3rem; color: var(--dark); margin-bottom: 20px; }
+        .about-text p { line-height: 1.8; color: #555; margin-bottom: 20px; }
+        .about-image img { width: 100%; border-radius: 20px; box-shadow: 20px 20px 0 var(--primary); }
+
+        /* DIFERENCIAIS */
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 50px 0; }
+        .feature-card { background: #f8f8f8; padding: 40px; border-radius: 15px; text-align: center; transition: 0.3s; }
+        .feature-card:hover { background: var(--dark); color: white; transform: translateY(-10px); }
+        .feature-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+
+        /* CTA FINAL - CONTATO */
+        .cta-motors {
+            background: var(--dark);
+            padding: 80px 0;
+            border-radius: 40px 40px 0 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-motors h2 { font-family: 'Bebas Neue'; font-size: 3.5rem; margin-bottom: 20px; }
+        .contact-info { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
+        .contact-item { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        .contact-item i { color: var(--primary); font-size: 1.5rem; }
+
+        .btn-motors {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
+        }
+
+        .btn-motors:hover { transform: scale(1.05); background: #e62244; }
+
+        @media (max-width: 768px) {
+            .about-motors { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-partner">
+        <div class="container nav-partner">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> VOLTAR AO CAMPINA MIL GRAU</a>
+            <img src="assets/images/logo.png" alt="Portal Logo" style="height: 40px;">
+        </div>
+    </header>
+
+    <section class="hero-motors">
+        <div class="hero-content">
+            <img src="assets/images/two_guedes.png" alt="Two Guedes Logo">
+            <h1>PERFORMANCE & EXCLUSIVIDADE</h1>
+            <p>A Two Guedes Motors une a paixão por carros à segurança de um negócio transparente em Campina Grande do Sul.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="about-motors">
+            <div class="about-text">
+                <h2>O SEU PRÓXIMO CARRO ESTÁ AQUI</h2>
+                <p>Com anos de experiência no mercado automotivo, a <strong>Two Guedes Motors</strong> se consolidou pela curadoria rigorosa de seus veículos. Cada carro em nosso estoque passa por uma inspeção detalhada para garantir a sua tranquilidade.</p>
+                <p>Localizada estrategicamente para atender Campina Grande do Sul e toda a RMC, somos mais que uma loja de carros: somos realizadores de sonhos sobre rodas.</p>
+            </div>
+<div class="about-image">
+    <img src="https://images.pexels.com/photos/627678/pexels-photo-627678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Estoque Two Guedes">
+</div>
+        </section>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-car-side"></i>
+                <h3>Estoque VIP</h3>
+                <p>Veículos selecionados e periciados.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-handshake"></i>
+                <h3>Melhor Avaliação</h3>
+                <p>Pagamos preço justo no seu usado.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Garantia Total</h3>
+                <p>Segurança pós-venda que você merece.</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="cta-motors">
+        <div class="container">
+            <h2>FALE COM UM CONSULTOR</h2>
+            <p>Dúvidas sobre financiamento ou quer agendar um Test Drive?</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>(41) 98870-5022</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Campina Grande do Sul - PR</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/5541988705022" target="_blank" class="btn-motors">
+                <i class="fab fa-whatsapp"></i> ACESSAR ESTOQUE NO WHATSAPP
+            </a>
+            
+            <div style="margin-top: 30px;">
+                <a href="https://twoguedesmotors.com.br/" target="_blank" style="color: #888; text-decoration: none;">Visitar Site Oficial</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
